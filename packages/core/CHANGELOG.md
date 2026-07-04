@@ -1,5 +1,18 @@
 # emdash
 
+## 0.27.1
+
+### Patch Changes
+
+- [#1732](https://github.com/emdash-cms/emdash/pull/1732) [`92fd412`](https://github.com/emdash-cms/emdash/commit/92fd41227225c425c703e0a0bb62b963c1cd4391) Thanks [@ascorbic](https://github.com/ascorbic)! - Fixes the plugin registration example in the `emdash()` options JSDoc: plugins are registered as default-export descriptors (`plugins: [auditLog]`), not via `auditLogPlugin()`-style factory calls, which have never existed.
+
+- [#1729](https://github.com/emdash-cms/emdash/pull/1729) [`932f4ba`](https://github.com/emdash-cms/emdash/commit/932f4ba3adef8be21abc39b4cc7612609895e88c) Thanks [@MA2153](https://github.com/MA2153)! - Speeds up taxonomy term lookups on SQLite/D1 by adding a composite `taxonomies(name, locale)` index. Previously the query planner scanned every term in a locale to resolve a single taxonomy, so pages rendering several facets paid a full-locale scan per facet on sites with large taxonomies. A forward-only migration adds the index and drops the now-redundant single-column name index.
+
+- Updated dependencies []:
+  - @emdash-cms/admin@0.27.1
+  - @emdash-cms/auth@0.27.1
+  - @emdash-cms/gutenberg-to-portable-text@0.27.1
+
 ## 0.27.0
 
 ### Minor Changes

@@ -1,5 +1,14 @@
 # @emdash-cms/cloudflare
 
+## 0.27.1
+
+### Patch Changes
+
+- [#1724](https://github.com/emdash-cms/emdash/pull/1724) [`90883de`](https://github.com/emdash-cms/emdash/commit/90883de81eb2da6409d1f176dd2dc8f27c56a547) Thanks [@swissky](https://github.com/swissky)! - Fixes `cloudflareEmail()` failing the Astro build. It now returns a plugin descriptor with a bundlable entrypoint instead of an in-process plugin definition, so the documented `plugins: [cloudflareEmail({...})]` usage builds again.
+
+- Updated dependencies [[`92fd412`](https://github.com/emdash-cms/emdash/commit/92fd41227225c425c703e0a0bb62b963c1cd4391), [`932f4ba`](https://github.com/emdash-cms/emdash/commit/932f4ba3adef8be21abc39b4cc7612609895e88c)]:
+  - emdash@0.27.1
+
 ## 0.27.0
 
 ### Minor Changes
