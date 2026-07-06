@@ -18,7 +18,7 @@
     }
   },
   "scripts": {
-    "build": "tsdown",
+    "build": "vp run bundle",
     "dev": "tsdown --watch",
     "prepublishOnly": "node --run build",
     "check": "publint && attw --pack --ignore-rules=cjs-resolves-to-esm --ignore-rules=no-resolution",

@@ -190,7 +190,7 @@
     "#types": "./src/astro/types.js"
   },
   "scripts": {
-    "build": "tsdown",
+    "build": "vp run bundle",
     "dev": "tsdown --watch",
     "prepublishOnly": "node --run build",
     "typecheck": "tsgo --noEmit",

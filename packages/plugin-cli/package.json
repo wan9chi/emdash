@@ -18,7 +18,7 @@
 		"schemas"
 	],
 	"scripts": {
-		"build": "node --run gen-schema && tsdown",
+		"build": "vp run generate-schema && vp run bundle",
 		"dev": "tsdown --watch",
 		"gen-schema": "node --no-warnings --experimental-strip-types scripts/gen-schema.ts",
 		"prepublishOnly": "node --run build",
