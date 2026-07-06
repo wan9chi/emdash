@@ -19,7 +19,7 @@ export default defineConfig({
 			styles: {
 				command: "npx @tailwindcss/cli -i src/styles.css -o dist/styles.css --minify",
 				untrackedEnv: ["_"],
-				input: [{ auto: true }, "!dist/styles.css"],
+				input: [{ auto: true }, "!dist", "!dist/**"],
 				output: ["dist/styles.css"],
 			},
 		},

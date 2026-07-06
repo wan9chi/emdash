@@ -4,8 +4,15 @@ export default {
 			"typecheck:astro": {
 				command: "astro check",
 				untrackedEnv: ["_"],
-				input: [{ auto: true }, "!.astro", "!.astro/**"],
-				output: [".astro/**"],
+				input: [
+					{ auto: true },
+					"!.astro",
+					"!.astro/**",
+					"!node_modules/.modules.yaml",
+					"!node_modules/.vite",
+					"!node_modules/.vite/**",
+				],
+				output: [".astro", ".astro/**"],
 			},
 		},
 	},

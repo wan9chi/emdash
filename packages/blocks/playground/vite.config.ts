@@ -17,7 +17,13 @@ export default defineConfig({
 			bundle: {
 				command: "vite build",
 				untrackedEnv: ["_"],
-				input: [{ auto: true }, "!dist", "!dist/**"],
+				input: [
+					{ auto: true },
+					"!dist",
+					"!dist/**",
+					"!node_modules/.vite-temp",
+					"!node_modules/.vite-temp/**",
+				],
 				output: ["dist/**"],
 			},
 		},
