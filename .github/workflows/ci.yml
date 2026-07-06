@@ -45,8 +45,8 @@ jobs:
             vite-task-typecheck-${{ runner.os }}-${{ runner.arch }}-main-
       - run: pnpm build
       - run: pnpm typecheck
-      - run: env -u ACTIONS_ORCHESTRATION_ID pnpm typecheck:demos:ci
-      - run: env -u ACTIONS_ORCHESTRATION_ID pnpm typecheck:templates
+      - run: env -i PATH="$PATH" HOME="$HOME" CI="$CI" PNPM_HOME="$PNPM_HOME" pnpm typecheck:demos:ci
+      - run: env -i PATH="$PATH" HOME="$HOME" CI="$CI" PNPM_HOME="$PNPM_HOME" pnpm typecheck:templates
       - run: node scripts/typecheck-public-source.mjs
       - name: Save Vite Task cache
         if: success() && steps.vite-task-cache.outputs.cache-hit != 'true'
