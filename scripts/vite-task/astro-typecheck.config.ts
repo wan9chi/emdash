@@ -17,7 +17,7 @@ export default defineConfig({
 					"!node_modules/.vite",
 					"!node_modules/.vite/**",
 				],
-				output: [".astro", ".astro/**"],
+				output: [],
 			},
 		},
 	},
