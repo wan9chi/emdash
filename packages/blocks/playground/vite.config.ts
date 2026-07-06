@@ -15,15 +15,9 @@ export default defineConfig({
 	run: {
 		tasks: {
 			bundle: {
-				command: "vite build",
+				command: "vite build --configLoader runner",
 				untrackedEnv: ["_"],
-				input: [
-					{ auto: true },
-					"!dist",
-					"!dist/**",
-					"!node_modules/.vite-temp",
-					"!node_modules/.vite-temp/**",
-				],
+				input: [{ auto: true }, "!dist", "!dist/**"],
 				output: ["dist/**"],
 			},
 		},

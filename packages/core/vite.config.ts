@@ -12,6 +12,8 @@ export default defineConfig({
 					"!dist/**",
 					"!node_modules/emdash/dist",
 					"!node_modules/emdash/dist/**",
+					{ pattern: "!node_modules/emdash/dist", base: "workspace" },
+					{ pattern: "!node_modules/emdash/dist/**", base: "workspace" },
 				],
 				output: ["dist/**"],
 			},

@@ -9,6 +9,7 @@ export default {
 					"!.astro",
 					"!.astro/**",
 					"!node_modules/.modules.yaml",
+					{ pattern: "!node_modules/.modules.yaml", base: "workspace" },
 					"!node_modules/.vite",
 					"!node_modules/.vite/**",
 				],
