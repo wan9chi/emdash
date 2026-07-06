@@ -87,7 +87,7 @@
     }
   },
   "scripts": {
-    "build": "tsdown",
+    "build": "vp run bundle",
     "dev": "tsdown --watch",
     "test": "vitest run",
     "prepublishOnly": "node --run build",

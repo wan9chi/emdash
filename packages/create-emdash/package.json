@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsdown",
+    "build": "vp run bundle",
     "dev": "tsdown --watch",
     "test": "vitest run",
     "typecheck": "tsgo --noEmit"

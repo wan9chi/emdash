@@ -15,7 +15,7 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "tsdown src/index.ts --format esm --dts --clean",
+		"build": "vp run bundle",
 		"dev": "tsdown src/index.ts --format esm --dts --watch",
 		"test": "vitest",
 		"prepublishOnly": "node --run build",

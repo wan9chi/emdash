@@ -34,7 +34,7 @@
 		"typescript": "catalog:"
 	},
 	"scripts": {
-		"build": "node node_modules/@emdash-cms/plugin-cli/dist/index.mjs build",
+		"build": "vp run bundle",
 		"dev": "emdash-plugin dev",
 		"typecheck": "tsgo --noEmit"
 	},

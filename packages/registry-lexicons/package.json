@@ -28,10 +28,10 @@
 		}
 	},
 	"scripts": {
+		"build": "vp run copy-lexicons && vp run bundle",
 		"codegen": "lex-cli generate",
 		"build:lexicons": "node scripts/copy-lexicons.mjs",
 		"build:types": "tsdown",
-		"build": "pnpm run build:lexicons && pnpm run build:types",
 		"regen": "pnpm run codegen && pnpm run build",
 		"prepublishOnly": "node --run build",
 		"typecheck": "tsgo --noEmit",

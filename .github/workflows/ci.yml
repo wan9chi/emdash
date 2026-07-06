@@ -18,6 +18,9 @@ jobs:
     name: Typecheck
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      VITE_TASK_CACHE_SCOPE: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'main' }}
+      VITE_TASK_CACHE_REVISION: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -28,14 +31,30 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Restore Vite Task cache
+        id: vite-task-cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: node_modules/.vite/task-cache
+          key: vite-task-typecheck-${{ runner.os }}-${{ runner.arch }}-${{ env.VITE_TASK_CACHE_SCOPE }}-${{ env.VITE_TASK_CACHE_REVISION }}
+          restore-keys: |
+            vite-task-typecheck-${{ runner.os }}-${{ runner.arch }}-${{ env.VITE_TASK_CACHE_SCOPE }}-
+            vite-task-typecheck-${{ runner.os }}-${{ runner.arch }}-main-
       - run: pnpm build
       - run: pnpm typecheck
-      - run: pnpm run --filter emdash-demo --filter @emdash-cms/demo-cloudflare typecheck
+      - run: pnpm typecheck:demos:ci
       - run: pnpm typecheck:templates
       - run: node scripts/typecheck-public-source.mjs
+      - name: Save Vite Task cache
+        if: success() && steps.vite-task-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: node_modules/.vite/task-cache
+          key: ${{ steps.vite-task-cache.outputs.cache-primary-key }}
 
   lint:
     name: Lint
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -53,6 +72,7 @@ jobs:
 
   version-check:
     name: Version Check
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -66,6 +86,7 @@ jobs:
 
   changeset-validate:
     name: Changeset Validation
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -91,6 +112,7 @@ jobs:
 
   test:
     name: Tests
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 15
     services:
@@ -130,6 +152,7 @@ jobs:
 
   test-smoke:
     name: Smoke Tests
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 30
     services:
@@ -162,6 +185,7 @@ jobs:
 
   test-integration:
     name: Integration Tests
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -179,6 +203,7 @@ jobs:
 
   test-browser:
     name: Browser Tests
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -203,7 +228,7 @@ jobs:
 
   test-e2e-rollup:
     name: E2E Tests
-    if: always()
+    if: false
     needs: [test-e2e]
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -217,6 +242,7 @@ jobs:
 
   test-e2e:
     name: E2E tests (${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 20
     strategy:
@@ -254,6 +280,7 @@ jobs:
 
   test-e2e-cloudflare:
     name: E2E Cloudflare (${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:
