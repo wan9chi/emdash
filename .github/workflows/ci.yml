@@ -35,7 +35,10 @@ jobs:
         id: vite-task-cache
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
-          path: node_modules/.vite/task-cache
+          path: |
+            node_modules/.vite/task-cache
+            demos/*/.astro
+            templates/*/.astro
           key: vite-task-typecheck-${{ runner.os }}-${{ runner.arch }}-${{ env.VITE_TASK_CACHE_SCOPE }}-${{ env.VITE_TASK_CACHE_REVISION }}
           restore-keys: |
             vite-task-typecheck-${{ runner.os }}-${{ runner.arch }}-${{ env.VITE_TASK_CACHE_SCOPE }}-
@@ -49,7 +52,10 @@ jobs:
         if: success() && steps.vite-task-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
-          path: node_modules/.vite/task-cache
+          path: |
+            node_modules/.vite/task-cache
+            demos/*/.astro
+            templates/*/.astro
           key: ${{ steps.vite-task-cache.outputs.cache-primary-key }}
 
   lint:
