@@ -19,7 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      ACTIONS_ORCHESTRATION_ID: emdash-typecheck
       VITE_TASK_CACHE_SCOPE: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'main' }}
       VITE_TASK_CACHE_REVISION: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
     steps:
@@ -46,8 +45,8 @@ jobs:
             vite-task-typecheck-${{ runner.os }}-${{ runner.arch }}-main-
       - run: pnpm build
       - run: pnpm typecheck
-      - run: pnpm typecheck:demos:ci
-      - run: pnpm typecheck:templates
+      - run: env -u ACTIONS_ORCHESTRATION_ID pnpm typecheck:demos:ci
+      - run: env -u ACTIONS_ORCHESTRATION_ID pnpm typecheck:templates
       - run: node scripts/typecheck-public-source.mjs
       - name: Save Vite Task cache
         if: success() && steps.vite-task-cache.outputs.cache-hit != 'true'
