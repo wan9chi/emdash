@@ -9,7 +9,7 @@
     "build:all": "pnpm run --filter @emdash-cms/demo-preview... build",
     "preview": "astro preview",
     "deploy": "pnpm build:all && wrangler deploy",
-    "typecheck": "astro check"
+    "typecheck": "astro sync && astro check --noSync"
   },
   "dependencies": {
     "@astrojs/cloudflare": "catalog:",
