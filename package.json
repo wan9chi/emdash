@@ -5,7 +5,7 @@
 	"version": "1.0.0",
 	"description": "Agent-portable reimplementation of WordPress on Astro",
 	"scripts": {
-		"typecheck": "vp run --cache --parallel --concurrency-limit=4 --filter {./packages/**} typecheck",
+		"typecheck": "vp run --cache --concurrency-limit=4 --filter {./packages/**} typecheck",
 		"typecheck:demos": "vp run --cache --concurrency-limit=1 --filter {./demos/*} --filter !@emdash-cms/demo-cloudflare typecheck",
 		"typecheck:demos:ci": "vp run --cache --filter emdash-demo --filter @emdash-cms/demo-cloudflare typecheck",
 		"typecheck:templates": "vp run --cache --concurrency-limit=1 --filter {./templates/*} typecheck",
