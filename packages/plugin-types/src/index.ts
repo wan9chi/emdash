@@ -28,7 +28,6 @@
  * EXPERIMENTAL: this package is published as part of the experimental plugin
  * registry roll-out. Pin to an exact version while RFC 0001 is in flight;
  * the manifest shape may evolve before the registry phase 1 cutover.
- * Cache probe: changing a typechecked source file must invalidate this task.
  */
 
 // ── Plugin capability vocabulary ─────────────────────────────────────────────
