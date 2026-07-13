@@ -11,7 +11,7 @@
 		"dev": "astro dev",
 		"build": "astro build",
 		"bootstrap": "emdash init && emdash seed",
-		"typecheck": "astro check"
+		"typecheck": "astro sync && astro check --noSync"
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "catalog:",
