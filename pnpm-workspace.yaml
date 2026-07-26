@@ -14,6 +14,11 @@ minimumReleaseAgeExclude:
   # stall. TEMPORARY: remove this scope exclusion once the cooldown has elapsed.
   - astro
   - "@astrojs/*"
+  # TEMPORARY: Vite+ preview build under test, published minutes ago and so
+  # always inside the cooldown. Remove with the `vite-plus` pin in package.json,
+  # the bridge registry in .npmrc, and the trustPolicyExclude entries below.
+  - vite-plus
+  - "@voidzero-dev/vite-plus-*"
 trustPolicy: no-downgrade
 strictDepBuilds: true
 dangerouslyAllowAllBuilds: false
@@ -36,6 +41,12 @@ allowBuilds:
   protobufjs: false
 # Reviewed benign trust downgrades (publish-method changes, not takeovers).
 trustPolicyExclude:
+  # TEMPORARY: Vite+ preview build from the registry bridge, used to test
+  # automatic task-cache tracking before it ships. Bridge builds carry no
+  # provenance attestation, unlike the npm releases. Remove this along with the
+  # `vite-plus` pin in package.json and the bridge registry in .npmrc.
+  - "vite-plus@0.0.0-commit.88ab4592d55342c11a070c47e8fc7205f675fda3"
+  - "@voidzero-dev/vite-plus-*" # preview build platform binaries (same TEMPORARY scope)
   - "vite@6.4.1" # trusted-publisher -> provenance (vitejs CI change)
   - "chokidar@4.0.3" # provenance -> none (Astro-pinned; pnpm's documented case)
   - "semver@6.3.1" # provenance -> none (old pinned util via @babel/core)
