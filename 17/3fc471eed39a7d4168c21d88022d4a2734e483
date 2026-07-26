@@ -1,0 +1,19 @@
+.github/workflows/ci.yml
+  s_dd382a3fca48ba::t_dddb96936da5ca 31-40,42-49,69-76,78-83
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "173fc471eed39a7d4168c21d88022d4a2734e483",
+  "prompts": {},
+  "sessions": {
+    "s_dd382a3fca48ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "s_dd382a3fca48ba",
+        "model": "unknown"
+      },
+      "human_author": "wan9chi <dk4rest@gmail.com>"
+    }
+  }
+}
