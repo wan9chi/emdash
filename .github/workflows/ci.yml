@@ -28,7 +28,25 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # Restored after install because installing can recreate node_modules,
+      # which is where Vite Task keeps the task cache.
+      - name: Restore Vite Task cache
+        id: vite-task-cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: node_modules/.vite/task-cache
+          key: vite-task-typecheck-${{ runner.os }}-${{ runner.arch }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            vite-task-typecheck-${{ runner.os }}-${{ runner.arch }}-
       - run: pnpm build
+      # Cache entries are immutable, so the primary key carries the run id and
+      # attempt and every successful run saves a new entry.
+      - name: Save Vite Task cache
+        if: success()
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: node_modules/.vite/task-cache
+          key: ${{ steps.vite-task-cache.outputs.cache-primary-key }}
       - run: pnpm typecheck
       - run: pnpm run --filter emdash-demo --filter @emdash-cms/demo-cloudflare typecheck
       - run: pnpm typecheck:templates
@@ -48,7 +66,21 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Restore Vite Task cache
+        id: vite-task-cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: node_modules/.vite/task-cache
+          key: vite-task-lint-${{ runner.os }}-${{ runner.arch }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            vite-task-lint-${{ runner.os }}-${{ runner.arch }}-
       - run: pnpm build
+      - name: Save Vite Task cache
+        if: success()
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: node_modules/.vite/task-cache
+          key: ${{ steps.vite-task-cache.outputs.cache-primary-key }}
       - run: pnpm lint
 
   version-check:
