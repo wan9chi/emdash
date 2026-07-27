@@ -14,7 +14,7 @@
 		"test:browser": "pnpm run --filter @emdash-cms/admin test",
 		"test:e2e": "playwright test",
 		"test:e2e:ui": "playwright test --ui",
-		"build": "vp run --cache --concurrency-limit=4 --filter {./packages/**} build",
+		"build": "vp run --cache --filter {./packages/**} build",
 		"postbuild": "node scripts/relink-bins-if-needed.mjs",
 		"format": "oxfmt --ignore-path .gitignore && prettier --write .",
 		"format:check": "oxfmt --ignore-path .gitignore --check && prettier --check .",
